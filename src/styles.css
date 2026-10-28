@@ -1,0 +1,132 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system — "Warm Sand" editorial palette for Aster & Oak.
+ *
+ * Colors are oklch tokens in :root/.dark, mapped to Tailwind utilities in
+ * @theme inline. Fonts are loaded via <link> in src/routes/__root.tsx.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-body: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.977 0.006 85);
+  --foreground: oklch(0.26 0.028 62);
+  --card: oklch(0.995 0.003 85);
+  --card-foreground: oklch(0.26 0.028 62);
+  --popover: oklch(0.995 0.003 85);
+  --popover-foreground: oklch(0.26 0.028 62);
+  --primary: oklch(0.50 0.07 60);
+  --primary-foreground: oklch(0.977 0.006 85);
+  --secondary: oklch(0.945 0.015 85);
+  --secondary-foreground: oklch(0.32 0.03 62);
+  --muted: oklch(0.945 0.012 85);
+  --muted-foreground: oklch(0.50 0.03 65);
+  --accent: oklch(0.83 0.05 82);
+  --accent-foreground: oklch(0.28 0.03 62);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0.003 85);
+  --border: oklch(0.885 0.02 80);
+  --input: oklch(0.885 0.02 80);
+  --ring: oklch(0.65 0.05 65);
+}
+
+.dark {
+  --background: oklch(0.22 0.02 62);
+  --foreground: oklch(0.94 0.012 85);
+  --card: oklch(0.26 0.022 62);
+  --card-foreground: oklch(0.94 0.012 85);
+  --popover: oklch(0.26 0.022 62);
+  --popover-foreground: oklch(0.94 0.012 85);
+  --primary: oklch(0.83 0.05 82);
+  --primary-foreground: oklch(0.24 0.02 62);
+  --secondary: oklch(0.30 0.025 62);
+  --secondary-foreground: oklch(0.94 0.012 85);
+  --muted: oklch(0.30 0.02 62);
+  --muted-foreground: oklch(0.70 0.025 80);
+  --accent: oklch(0.36 0.03 66);
+  --accent-foreground: oklch(0.94 0.012 85);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0.003 85);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.60 0.05 70);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-body);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Slow, warm reveal for page sections */
+@utility rise-in {
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  &.delay-1 { animation-delay: 0.1s; }
+  &.delay-2 { animation-delay: 0.2s; }
+  &.delay-3 { animation-delay: 0.3s; }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
