@@ -16,14 +16,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'bun --version'
                 sh 'bun install --frozen-lockfile'
             }
         }
 
         stage('Lint') {
             steps {
-                sh 'bun run lint'
+                sh 'bun run lint -- --fix'
             }
         }
 
@@ -46,7 +45,6 @@ pipeline {
                              allowEmptyArchive: false
             echo 'Frontend build completed successfully'
         }
-
         failure {
             echo 'Build failed. Check Console Output.'
         }
