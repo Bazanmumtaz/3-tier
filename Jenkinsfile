@@ -41,8 +41,7 @@ pipeline {
 
     post {
         success {
-            archiveArtifacts artifacts: 'dist/**',
-                             allowEmptyArchive: false
+            archiveArtifacts artifacts: '.output/**', fingerprint: true
             echo 'Frontend build completed successfully'
         }
         failure {
