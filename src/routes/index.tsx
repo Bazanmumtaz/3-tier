@@ -67,8 +67,8 @@ function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <h2 className="text-3xl">What we do</h2>
           <p className="mt-2 max-w-xl text-muted-foreground">
-            Three crafts, one standard: if it lives in your home for years, it should
-            be built for it.
+            Three crafts, one standard: if it lives in your home for years, it should be built for
+            it.
           </p>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {services.slice(0, 3).map((service, i) => (

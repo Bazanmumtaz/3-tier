@@ -74,8 +74,7 @@ function ContactPage() {
         </p>
         <h1 className="mt-4 text-4xl md:text-5xl">Tell us about your space.</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          A few lines are enough — we'll come back with questions, ideas, and a
-          rough budget.
+          A few lines are enough — we'll come back with questions, ideas, and a rough budget.
         </p>
       </div>
 
@@ -128,8 +127,8 @@ function ContactPage() {
             <div className="rise-in rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
               <h2 className="text-2xl">Sign in to send a message</h2>
               <p className="mx-auto mt-3 max-w-sm text-muted-foreground">
-                Messages are tied to an account so nothing gets lost — and you can
-                always see what you sent us.
+                Messages are tied to an account so nothing gets lost — and you can always see what
+                you sent us.
               </p>
               <Button asChild size="lg" className="mt-6">
                 <Link to="/auth">Sign in or create an account</Link>

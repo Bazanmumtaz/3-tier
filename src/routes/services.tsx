@@ -35,8 +35,7 @@ function ServicesPage() {
           </p>
           <h1 className="mt-4 text-4xl md:text-5xl">Made to measure, in every sense.</h1>
           <p className="mt-5 text-lg text-muted-foreground">
-            Pick one service or combine them all — most projects start with a single
-            stubborn room.
+            Pick one service or combine them all — most projects start with a single stubborn room.
           </p>
         </div>
       </section>

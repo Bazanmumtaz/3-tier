@@ -20,14 +20,12 @@ export const Route = createFileRoute("/auth")({
       { title: `Sign in — ${site.name}` },
       {
         name: "description",
-        content:
-          "Sign in to your account, or create one, to send messages to the studio.",
+        content: "Sign in to your account, or create one, to send messages to the studio.",
       },
       { property: "og:title", content: `Sign in — ${site.name}` },
       {
         property: "og:description",
-        content:
-          "Sign in to your account, or create one, to send messages to the studio.",
+        content: "Sign in to your account, or create one, to send messages to the studio.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -50,9 +48,8 @@ function AuthPage() {
 
   // Same-origin path only — never bounce through an external URL.
   const search = Route.useSearch();
-  const returnTo = typeof search.redirect === "string" && search.redirect.startsWith("/")
-    ? search.redirect
-    : "/";
+  const returnTo =
+    typeof search.redirect === "string" && search.redirect.startsWith("/") ? search.redirect : "/";
 
   // Already signed in? Go home.
   useEffect(() => {
@@ -112,8 +109,8 @@ function AuthPage() {
       <AuthShell>
         <h1 className="text-3xl">Check your email</h1>
         <p className="mt-3 text-muted-foreground">
-          We sent a confirmation link to <strong>{email}</strong>. Click it to
-          activate your account, then sign in.
+          We sent a confirmation link to <strong>{email}</strong>. Click it to activate your
+          account, then sign in.
         </p>
       </AuthShell>
     );
@@ -124,8 +121,8 @@ function AuthPage() {
       <AuthShell>
         <h1 className="text-3xl">Reset link sent</h1>
         <p className="mt-3 text-muted-foreground">
-          If an account exists for <strong>{email}</strong>, a reset link is on its
-          way. It opens the page where you can set a new password.
+          If an account exists for <strong>{email}</strong>, a reset link is on its way. It opens
+          the page where you can set a new password.
         </p>
       </AuthShell>
     );
@@ -135,7 +132,11 @@ function AuthPage() {
     <AuthShell>
       <div className="text-center">
         <h1 className="text-3xl">
-          {mode === "signin" ? "Welcome back" : mode === "signup" ? "Create an account" : "Reset your password"}
+          {mode === "signin"
+            ? "Welcome back"
+            : mode === "signup"
+              ? "Create an account"
+              : "Reset your password"}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {mode === "forgot"
@@ -146,7 +147,13 @@ function AuthPage() {
 
       {mode !== "forgot" && (
         <div className="grid gap-3">
-          <Button type="button" variant="outline" size="lg" onClick={() => handleSocialSignIn("google")} disabled={busy}>
+          <Button
+            type="button"
+            variant="outline"
+            size="lg"
+            onClick={() => handleSocialSignIn("google")}
+            disabled={busy}
+          >
             Continue with Google
           </Button>
           <button

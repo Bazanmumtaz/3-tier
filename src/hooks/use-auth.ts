@@ -18,14 +18,13 @@ function emit(session: Session | null) {
  * the router and query cache can react.
  */
 export function startAuthListener(
-  onIdentityChange?: (event: "SIGNED_IN" | "SIGNED_OUT" | "USER_UPDATED") => void
+  onIdentityChange?: (event: "SIGNED_IN" | "SIGNED_OUT" | "USER_UPDATED") => void,
 ) {
   if (started) return;
   started = true;
 
   supabase.auth.onAuthStateChange((event, session) => {
-    if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED")
-      return;
+    if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
     emit(session);
     onIdentityChange?.(event);
   });

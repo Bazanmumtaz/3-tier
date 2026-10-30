@@ -7,9 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div>
           <p className="font-display text-lg">{site.name}</p>
-          <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-            {site.tagline}
-          </p>
+          <p className="mt-2 max-w-xs text-sm text-muted-foreground">{site.tagline}</p>
         </div>
         <div>
           <p className="text-sm font-semibold">Visit</p>
@@ -21,10 +19,16 @@ export function SiteFooter() {
           <p className="mt-2 text-sm text-muted-foreground">{site.email}</p>
           <p className="text-sm text-muted-foreground">{site.phone}</p>
           <div className="mt-3 flex gap-3 text-sm">
-            <Link to="/services" className="text-muted-foreground underline-offset-4 hover:underline">
+            <Link
+              to="/services"
+              className="text-muted-foreground underline-offset-4 hover:underline"
+            >
               Services
             </Link>
-            <Link to="/contact" className="text-muted-foreground underline-offset-4 hover:underline">
+            <Link
+              to="/contact"
+              className="text-muted-foreground underline-offset-4 hover:underline"
+            >
               Contact
             </Link>
           </div>

@@ -44,8 +44,7 @@ export const services: Service[] = [
     id: "planning",
     number: "03",
     title: "Space planning",
-    summary:
-      "Layouts that make small and awkward rooms work harder, without moving a single wall.",
+    summary: "Layouts that make small and awkward rooms work harder, without moving a single wall.",
     details: [
       "Measured floor plans and flow studies",
       "Furniture placement and sightlines",
@@ -56,8 +55,7 @@ export const services: Service[] = [
     id: "renovation",
     number: "04",
     title: "Light renovations",
-    summary:
-      "Kitchens, bathrooms, and small extensions managed end to end with trades we trust.",
+    summary: "Kitchens, bathrooms, and small extensions managed end to end with trades we trust.",
     details: [
       "Scope, budget, and schedule in writing",
       "One point of contact from start to finish",
