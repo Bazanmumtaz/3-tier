@@ -80,7 +80,25 @@ pipeline {
                 '''
             }
         }
-        
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh '''
+                    docker save ${IMAGE_NAME}:${BUILD_NUMBER} | \
+                      sudo -n /usr/local/bin/k3s ctr images import -
+
+                    kubectl apply -f k8s/
+
+                    kubectl set image \
+                      deployment/three-tier-app \
+                      app=${IMAGE_NAME}:${BUILD_NUMBER}
+
+                    kubectl rollout status \
+                      deployment/three-tier-app \
+                      --timeout=180s
+                '''
+            }
+        }
     }
 
     post {
