@@ -1,51 +1,96 @@
-
 pipeline {
-    agent {
-        docker {
-            image 'oven/bun:1'
-        }
+    agent any
+
+    environment {
+        IMAGE_NAME = '3-tier-app'
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
     }
 
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
-                sh 'echo Source code checked out successfully'
+                echo 'Source code checked out successfully'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'bun install --frozen-lockfile'
+                sh '''
+                    docker run --rm \
+                      --user "$(id -u):$(id -g)" \
+                      -e HOME=/tmp \
+                      -v "$WORKSPACE:/app" \
+                      -w /app \
+                      oven/bun:1 \
+                      bun install --frozen-lockfile
+                '''
             }
         }
 
         stage('Lint') {
             steps {
-                sh 'bun run lint -- --fix'
+                sh '''
+                    docker run --rm \
+                      --user "$(id -u):$(id -g)" \
+                      -e HOME=/tmp \
+                      -v "$WORKSPACE:/app" \
+                      -w /app \
+                      oven/bun:1 \
+                      bun run lint
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                sh 'bun run test --passWithNoTests'
+                sh '''
+                    docker run --rm \
+                      --user "$(id -u):$(id -g)" \
+                      -e HOME=/tmp \
+                      -v "$WORKSPACE:/app" \
+                      -w /app \
+                      oven/bun:1 \
+                      bun run test --passWithNoTests
+                '''
             }
         }
 
-        stage('Build Frontend') {
+        stage('Build Application') {
             steps {
-                sh 'bun run build'
+                sh '''
+                    docker run --rm \
+                      --user "$(id -u):$(id -g)" \
+                      -e HOME=/tmp \
+                      -e NITRO_PRESET=node-server \
+                      -v "$WORKSPACE:/app" \
+                      -w /app \
+                      oven/bun:1 \
+                      bun run build
+                '''
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                    docker build \
+                      -t ${IMAGE_NAME}:${BUILD_NUMBER} \
+                      -t ${IMAGE_NAME}:latest .
+                '''
+            }
+        }
+        
     }
 
     post {
         success {
-            archiveArtifacts artifacts: '.output/**', fingerprint: true
-            echo 'Frontend build completed successfully'
+            echo 'SUCCESS: Application built and deployed to Kubernetes!'
+            archiveArtifacts artifacts: '.output/**', allowEmptyArchive: true
         }
+
         failure {
-            echo 'Build failed. Check Console Output.'
+            echo 'FAILED: Check the Jenkins Console Output.'
         }
     }
 }

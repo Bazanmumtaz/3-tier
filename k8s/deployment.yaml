@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: three-tier-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: three-tier-app
+  template:
+    metadata:
+      labels:
+        app: three-tier-app
+    spec:
+      containers:
+        - name: app
+          image: 3-tier-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: HOST
+              value: "0.0.0.0"
+            - name: PORT
+              value: "3000"
+            - name: NITRO_HOST
+              value: "0.0.0.0"
+            - name: NITRO_PORT
+              value: "3000"
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 20
